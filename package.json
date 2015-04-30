@@ -1,0 +1,32 @@
+{
+  "name": "cordova-plugin-xhr-blob-polyfill",
+  "version": "1.0.3-dev",
+  "description": "A Cordova plugin which provides Blob return type support for XMLHttpRequest in iOS (pre iOS7) and Android (pre-KitKat)",
+  "cordova": {
+    "id": "cordova-plugin-xhr-blob-polyfill",
+    "platforms": []
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MobileChromeApps/cordova-plugin-xhr-blob-polyfill.git"
+  },
+  "keywords": [
+    "chrome",
+    "polyfill",
+    "xhr",
+    "blob",
+    "ecosystem:cordova"
+  ],
+  "engines": [
+    {
+      "name": "cordova",
+      "version": ">=3.0.0"
+    }
+  ],
+  "author": "",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/MobileChromeApps/cordova-plugin-xhr-blob-polyfill/issues"
+  },
+  "homepage": "https://github.com/MobileChromeApps/cordova-plugin-xhr-blob-polyfill"
+}
