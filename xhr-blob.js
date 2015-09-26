@@ -3,14 +3,6 @@
 // found in the LICENSE file.
 
 
-// Support was added in iOS7.
-var xhr = new XMLHttpRequest();
-xhr.open('GET', '', true);
-xhr.responseType = 'blob';
-if (xhr.responseType == 'blob') {
-    return;
-}
-
 function proxyMethod(methodName) {
     return function() {
         this._proxy[methodName].apply(this._proxy, arguments);
@@ -103,12 +95,19 @@ function chromeXHR() {
         }
     });
 }
-/* Proxy methods */
-['open','setRequestHeader','send','abort','getResponseHeader','getAllResponseHeaders','overrideMimeType', 'addEventListener', 'removeEventListener'].forEach(function(elem) {
-    chromeXHR.prototype[elem] = proxyMethod(elem);
-});
-chromeXHR.prototype.addEventListener = function(eventName, handler) {
-  this._proxy.addEventListener(eventName, proxyProgressEventHandler(this, eventName.toLowerCase(), handler));
-}
 
-exports.XMLHttpRequest = chromeXHR;
+// Support was added in iOS7.
+var xhr = new XMLHttpRequest();
+xhr.open('GET', '', true);
+xhr.responseType = 'blob';
+if (xhr.responseType != 'blob') {
+    /* Proxy methods */
+    ['open','setRequestHeader','send','abort','getResponseHeader','getAllResponseHeaders','overrideMimeType', 'addEventListener', 'removeEventListener'].forEach(function(elem) {
+        chromeXHR.prototype[elem] = proxyMethod(elem);
+    });
+    chromeXHR.prototype.addEventListener = function(eventName, handler) {
+      this._proxy.addEventListener(eventName, proxyProgressEventHandler(this, eventName.toLowerCase(), handler));
+    }
+    
+    exports.XMLHttpRequest = chromeXHR;
+}
